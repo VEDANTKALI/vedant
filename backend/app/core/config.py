@@ -1,7 +1,11 @@
 import os
+import tempfile
 from typing import List, Union
 from pydantic import AnyHttpUrl, validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# Get writable temp directory for Vercel / serverless environment
+_temp_sqlite_db = os.path.join(tempfile.gettempdir(), "aivoa_qms.db").replace("\\", "/")
 
 
 class Settings(BaseSettings):
@@ -12,7 +16,7 @@ class Settings(BaseSettings):
 
     # Database
     DATABASE_URL: str = "postgresql+psycopg2://postgres:postgres@localhost:5432/aivoa_qms"
-    SQLITE_FALLBACK_URL: str = "sqlite:///./aivoa_qms.db"
+    SQLITE_FALLBACK_URL: str = f"sqlite:///{_temp_sqlite_db}"
 
     # Groq AI
     GROQ_API_KEY: str = ""
@@ -21,11 +25,7 @@ class Settings(BaseSettings):
     LLM_MAX_TOKENS: int = 1500
 
     # CORS
-    BACKEND_CORS_ORIGINS: List[str] = [
-        "http://localhost:5173",
-        "http://localhost:3000",
-        "http://127.0.0.1:5173",
-    ]
+    BACKEND_CORS_ORIGINS: List[str] = ["*"]
 
     model_config = SettingsConfigDict(
         env_file=".env",
