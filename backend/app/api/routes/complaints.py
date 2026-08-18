@@ -45,16 +45,19 @@ def analyze_complaint(payload: AIAnalyzeRequest, repo: ComplaintRepository = Dep
             missing_fields=graph_state.get("missing_fields") or []
         )
 
-        # Audit AI Run
-        repo.log_ai_run(
-            complaint_id=None,
-            workflow_name="complaint_analysis_workflow",
-            model_name="gemma2-9b-it",
-            status="SUCCESS",
-            duration_ms=graph_state.get("processing_time_ms", 0.0),
-            raw_input=payload.text,
-            raw_output=extracted_comp.model_dump()
-        )
+        # Audit AI Run (safe execution)
+        try:
+            repo.log_ai_run(
+                complaint_id=None,
+                workflow_name="complaint_analysis_workflow",
+                model_name="gemma2-9b-it",
+                status="SUCCESS",
+                duration_ms=graph_state.get("processing_time_ms", 0.0),
+                raw_input=payload.text,
+                raw_output=extracted_comp.model_dump()
+            )
+        except Exception as log_err:
+            logger.warning(f"Failed to log AI run audit ({log_err}). Continuing execution.")
 
         return AIAnalysisResponse(
             success=True,
