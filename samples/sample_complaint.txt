@@ -1,0 +1,9 @@
+CUSTOMER COMPLAINT REPORT — PHARMACEUTICAL QMS
+Reporter: MetroCare Health System / Dr. Robert Vance
+Market: US
+Product: Amoxicillin 250mg Capsules
+Batch Number: AMX-2026-774
+Quantity Affected: 50 units
+
+Description:
+Retail pharmacy received a shipment of Amoxicillin 250mg Capsules (Batch #AMX-2026-774). Upon inspection, 2 blister packs exhibited pin-hole tears in the primary aluminum foil seal. The capsules were exposed to ambient humidity causing clumping. Immediate quarantine required.

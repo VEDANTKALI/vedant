@@ -1,0 +1,31 @@
+# Environment Variables & Secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Databases & Local SQLite
+*.db
+*.sqlite3
+
+# Node Dependencies & Builds
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Python Cache & Virtual Envs
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+venv/
+ENV/
+env/
+
+# OS / Editor Files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
